@@ -35,15 +35,28 @@ public class GameEngine {
             }
         }
     }
+    private Monster generateRandomMonster(){
+        String[] monsterNames = {"Goblin", "Orc", "Skeleton"};
+        String name = monsterNames[(int) (Math.random() * monsterNames.length)];
+        int health = (int) (Math.random() * 20) + 30;
+        int attack = (int) (Math.random()*5) + 5;
+        return new Monster(name, health, attack);
+    }
 
     private void checkStats() {
+        System.out.println("\nPlayer stats: ");
+        System.out.println("Health: " + player.getHealth());
+        System.out.println("Attack: " + player.getAttack());
+        System.out.println("Defense: " + player.getDefense());
+        System.out.println("Level: " + player.getLevel());
+        System.out.println("Experience: " + player.getExperience());
     }
 
     private void explore() {
         System.out.println("You are walking into the wild");
         if(Math.random() < 0.5){
             System.out.println("A monster appears!");
-            Monster monster = new Monster("Goblin", 30, 5);
+            Monster monster = generateRandomMonster();
             battel(monster);
         } else {
             System.out.println("The area is peaceful. Enjoy while it last");
@@ -81,6 +94,11 @@ public class GameEngine {
         } else {
             System.out.println("You were defeated");
         }
+    }
+
+    public static void main(String[] args) {
+        GameEngine gameEngine = new GameEngine();
+        gameEngine.startGame();
     }
 
 }
