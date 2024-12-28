@@ -107,4 +107,12 @@ public class Player {
     public void setInventory(List<String> inventory) {
         this.inventory = inventory;
     }
+
+    public void heal(int amount) {
+        health += amount;
+        if(health > maxHealth){
+            health = maxHealth;
+        }
+        System.out.println(name + " healed for " + amount + " health points. Current health: " + health);
+    }
 }
