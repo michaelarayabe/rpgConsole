@@ -12,8 +12,11 @@ out/
 .springBeans
 .sts4-cache
 .idea
+lib
 rpgConsole.iml
 savegame.txt
+mika
+zola
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/

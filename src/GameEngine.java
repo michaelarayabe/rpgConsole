@@ -18,7 +18,10 @@ public class GameEngine {
         scanner.nextLine();
 
         if(option == 2){
-            player = GameFileHandler.loadGame();
+            System.out.println("Enter the filename to load: ");
+            String fileName = scanner.nextLine();
+
+            player = GameFileHandler.loadGame(fileName);
             if(player == null){
                 System.out.println("Starting new game instead. ");
                 createNewPlayer();
@@ -41,7 +44,11 @@ public class GameEngine {
             switch(choice){
                 case 1 -> explore();
                 case 2 -> checkStats();
-                case 3 -> GameFileHandler.saveGame(player);
+                case 3 -> {
+                    System.out.println("Enter the filename to save: ");
+                    String fileName = scanner.nextLine();
+                    GameFileHandler.saveGame(player, fileName);
+                }
                 case 4 -> {
                     System.out.println("Good bye");
                     running = false;
@@ -77,6 +84,10 @@ public class GameEngine {
     private void explore() {
         System.out.println("You are walking into the wild");
         if(Math.random() < 0.5){
+            String[] items = {"Potion", "Sword", "Shield", "Gold"};
+            String foundItem = items[(int) (Math.random() * items.length)];
+            System.out.println("You found a " + foundItem + "!");
+            player.addToInventory(foundItem);
             System.out.println("A monster appears!");
             Monster monster = generateRandomMonster();
             battel(monster);

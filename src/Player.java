@@ -23,7 +23,23 @@ public class Player {
     }
 
     public void addToInventory(String item){
-        inventory.add(item);
+        if(!inventory.contains(item)){
+            inventory.add(item);
+            System.out.println(item + " added to inventory");
+        } else {
+            System.out.println(item + " is already in your inventory.");
+        }
+    }
+
+    public void displayInventory(){
+        System.out.println("\nInventory:");
+        if(inventory.isEmpty()){
+            System.out.println("Your inventory is empty");
+        } else {
+            for(int i = 0; i < inventory.size(); i++){
+                System.out.println((i + 1) + ". " + inventory.get(i));
+            }
+        }
     }
 
     public void takeDamage(int damage){
