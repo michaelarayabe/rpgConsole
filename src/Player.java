@@ -22,6 +22,10 @@ public class Player {
         this.inventory = new ArrayList<>();
     }
 
+    public void addToInventory(String item){
+        inventory.add(item);
+    }
+
     public void takeDamage(int damage){
         health -= Math.max(0, damage - defense);
         if(health < 0) health = 0;

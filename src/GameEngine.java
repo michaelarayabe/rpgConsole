@@ -10,16 +10,30 @@ public class GameEngine {
 
     public void startGame(){
         System.out.println("Welcome to RPG console game");
-        System.out.println("Enter your name");
-        String name = scanner.nextLine();
-        player = new Player(name);
+        System.out.println("1. New Game");
+        System.out.println("2. Load Game");
+        System.out.println("Choose an option: ");
+        int option = scanner.nextInt();
+
+        scanner.nextLine();
+
+        if(option == 2){
+            player = GameFileHandler.loadGame();
+            if(player == null){
+                System.out.println("Starting new game instead. ");
+                createNewPlayer();
+            }
+        } else {
+            createNewPlayer();
+        }
 
         boolean running = true;
         while (running){
             System.out.println("Choose an action: ");
             System.out.println("1. Explore");
             System.out.println("2. Check stats");
-            System.out.println("3. Quit");
+            System.out.println("3. Save Game");
+            System.out.println("4. Quit");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -27,7 +41,8 @@ public class GameEngine {
             switch(choice){
                 case 1 -> explore();
                 case 2 -> checkStats();
-                case 3 -> {
+                case 3 -> GameFileHandler.saveGame(player);
+                case 4 -> {
                     System.out.println("Good bye");
                     running = false;
                 }
@@ -35,6 +50,13 @@ public class GameEngine {
             }
         }
     }
+
+    private void createNewPlayer() {
+        System.out.println("Enter your name: ");
+        String name = scanner.nextLine();
+        player = new Player(name);
+    }
+
     private Monster generateRandomMonster(){
         String[] monsterNames = {"Goblin", "Orc", "Skeleton"};
         String name = monsterNames[(int) (Math.random() * monsterNames.length)];

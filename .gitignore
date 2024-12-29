@@ -13,6 +13,7 @@ out/
 .sts4-cache
 .idea
 rpgConsole.iml
+savegame.txt
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
